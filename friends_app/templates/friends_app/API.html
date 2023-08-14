@@ -1,0 +1,36 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_navbar %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/navbar.css' %}">
+{% endblock %}
+
+{% block title %} {{title}} {% endblock %}
+
+
+{% block content %}
+    {% include 'includes/navbar.html' %}
+    <ul>
+        <li>
+            <h3>Регистрация: v1/auth/users/</h3>
+        </li>
+        <li>
+            <h3>Авторизация: v1/friends-auth/login/</h3>
+        </li>
+        <li>
+            <h3>Авторизация по токену (без адреса /api/ ): auth/token/login/</h3>
+        </li>
+        <br>
+        <h3>Добавить, изменить, удалить комментарий / информацию:</h3>
+        <li><h4>Смотреть комментарии / добавить комментарий: v1/friends/comment/</h4></li>
+        <li><h4>Изменить комментарий:  v1/friends/comment/id_comment/</h4></li>
+        <li><h4>Удалить комментарий: v1/friendsdelete/comment/id_comment</h4></li>
+        <br>
+        <li><h4>Смотреть информацию / добавить информацию:  v1/friends/</h4></li>
+        <li><h4>Изменить :  v1/friends/id/</h4></li>
+        <li><h4>Удалить : v1/friendsdelete/comment/id</h4></li>
+
+    </ul>
+{% include 'includes/paginator.html' %}
+{% endblock %}

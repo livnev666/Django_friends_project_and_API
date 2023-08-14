@@ -1,0 +1,30 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_additional %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/list_css.css' %}">
+{% endblock %}
+
+{% block title %} Все о {{one_dir.first_name}} {{one_dir.last_name}}{% endblock %}
+
+
+{% block content %}
+
+    {% include 'includes/navbar.html' %}
+    <hr>
+    <h2>Режиссер</h2>
+    <p>{{one_dir.first_name}} {{one_dir.last_name}}</p>
+    <p>{{one_dir.content}}</p>
+    {% if one_dir.photo %}
+        <p><img src="{{one_dir.photo.url}}" alt="" height="400" width="300"></p>
+    {% endif %}
+    <hr>
+    <h3>Список фильмов:</h3>
+    {% for i in one_dir.movie_set.all %}
+        <li>
+            <p><a href="{{i.get_movie_url}}">{{i.name}}</a></p>
+        </li>
+    {% endfor %}
+    <hr>
+{% endblock %}

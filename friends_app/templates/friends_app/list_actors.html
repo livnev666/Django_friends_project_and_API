@@ -1,0 +1,32 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_additional %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/list_actors.css' %}">
+{% endblock %}
+{% block index_navbar %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/navbar.css' %}">
+{% endblock %}
+
+{% block title %} {{title}} {% endblock %}
+
+
+{% block content %}
+    {% include 'includes/navbar.html' %}
+    <ul>
+        <li>
+            {% for i in post %}
+                <h2><a href="{{i.get_actor_url}}">{{i.first_name}} {{i.last_name}}</a></h2>
+                <p>{{i.content|linebreaks|truncatewords:45}}</p>
+                {% if i.photo %}
+                    <p><img src="{{i.photo.url}}" alt="" height="160" width="120"></p>
+                {% endif %}
+                <p><a href="{{i.link_web}}">Web-ссылка</a></p>
+            <hr>
+            {% endfor %}
+
+        </li>
+    </ul>
+{% include 'includes/paginator.html' %}
+{% endblock %}

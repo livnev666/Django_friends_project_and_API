@@ -1,0 +1,20 @@
+{% load static %}
+
+<nav>
+  {% for i in dc_bar %}
+    <a href="{% url i.url_name %}">{{i.title}}</a> ||
+  {% endfor %}
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'add_info' %}">Добавить информацию</a> || <a href="{% url 'add_track' %}">Добавить трек</a>
+    <li>Привет {{user.username}}!</li>|| <a href="{% url 'add-comment-user' %}">Добавить комментарий к сериалу Друзья</a>
+    || <a href="{% url 'comment-user' %}">Комментарии</a> || <a href="{% url 'log-out' %}">Выйти</a>||
+  {% else %}
+    <a href="{% url 'log-in' %}">Войти</a> || <a href="{% url 'registr' %}">Регистрация</a>
+  {% endif %}
+</nav>
+
+<br>
+<br>
+
+
+

@@ -1,0 +1,30 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_additional %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/all_movies.css' %}">
+{% endblock %}
+
+{% block title %} {{title}} {% endblock %}
+
+
+{% block content %}
+
+    {% include 'includes/navbar.html' %}
+    <h2>Количество фильмов в базе данных: {{agg.id__count}} картин</h2>
+    <br>
+    <ul>
+        <li>
+            <h2>Название фильмов:</h2>
+            {% for i in mov %}
+                <h3><a href="{{i.get_movie_url}}">{{i.name}}</a> {{i.years}}</h3>
+                <p>Описание фильма: {{i.content}}</p>
+                <p>Рейтинг {{i.rating}}</p>
+                <hr>
+            {% endfor %}
+
+        </li>
+    </ul>
+{% include 'includes/paginator.html' %}
+{% endblock %}

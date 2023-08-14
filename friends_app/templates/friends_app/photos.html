@@ -1,0 +1,26 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_additional %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/list_director_friends.css' %}">
+{% endblock %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+    {% include 'includes/navbar.html' %}
+    <ul>
+        <li>
+            {% for i in ph %}
+                {% if i.photo %}
+                    <p><img src="{{ i.photo.url }}" alt=""></p>
+                {% endif %}
+            <hr>
+            {% endfor %}
+
+        </li>
+    </ul>
+{% include 'includes/paginator.html' %}
+{% endblock %}

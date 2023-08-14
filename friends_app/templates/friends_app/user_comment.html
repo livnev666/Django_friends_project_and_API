@@ -1,0 +1,26 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_additional %}
+     <link rel="stylesheet" href="{% static 'friends_app/css/about_serial.css' %}">
+{% endblock %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+    {% include 'includes/navbar.html' %}
+    <h2>Комментарии к сериалу Друзья:</h2>
+    {% for i in post %}
+        <br>
+        <br>
+        <h3>Имя пользователя: {{i.name}}</h3>
+        <p>Комментарий: {{i.comment}}</p>
+        <br>
+        <hr>
+    {% endfor %}
+
+{% include 'includes/paginator.html' %}
+
+{% endblock %}

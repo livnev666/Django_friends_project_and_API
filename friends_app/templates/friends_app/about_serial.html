@@ -1,0 +1,16 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_additional %}
+     <link rel="stylesheet" href="{% static 'friends_app/css/about_serial.css' %}">
+{% endblock %}
+
+{% block title %} Friends {% endblock %}
+
+
+{% block content %}
+
+    {% include 'includes/navbar.html' %}
+    <h4>{{mov}}</h4>
+{% endblock %}

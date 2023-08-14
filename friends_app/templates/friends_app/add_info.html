@@ -1,0 +1,31 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_additional %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/form_css.css' %}">
+{% endblock %}
+{% block index_navbar %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/list_director.css' %}">
+{% endblock %}
+
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+{% include 'includes/navbar.html' %}
+  <h3>{{title}}</h3>
+  <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for i in form %}
+          <div class="form-style">
+            {{i.label_tag}}
+            {{i.errors}}
+            {{i}}
+          </div>
+        {% endfor %}
+
+        <button type="submit">Добавить</button>
+    </form>
+
+{% endblock %}

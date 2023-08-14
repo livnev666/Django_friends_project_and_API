@@ -1,0 +1,33 @@
+{% extends 'friends_app/base.html' %}
+
+{% load static %}
+
+{% block index_additional %}
+    <link rel="stylesheet" href="{% static 'friends_app/css/music_sound_track.css' %}">
+{% endblock %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+{% include 'includes/navbar.html' %}
+<br>
+<br>
+<hr>
+  <h2>{{title}}:</h2>
+<br>
+<br>
+
+  {% for i in sound %}
+
+    <h3>Трек - {{i.name_song}}</h3>
+    <h4>Исполнитель - {{i.artist}}</h4>
+    <audio controls id="player">
+      <source src="{% if i.song %} {{ i.song.url }} {% endif %}" type="audio/mp3">
+    </audio>
+
+  {% endfor %}
+<br>
+<br>
+<hr>
+{% include 'includes/paginator.html' %}
+{% endblock %}
