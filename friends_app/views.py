@@ -300,11 +300,11 @@ class Movies(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'title': 'Список фильмов с актерами из Друзей',
+            'dir': Director.objects.all()[3:],
+            'title': 'Список режиссеров',
+            'agg': Director.objects.all()[3:].aggregate(Max('age'), Min('age')),
             'dc_bar': dc_bar,
-            'agg': Movie.objects.all().aggregate(Count('id'))
         })
-        return context
 # def movies(request):
 #
 #     mov = Movie.objects.all()
