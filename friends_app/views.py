@@ -223,7 +223,7 @@ class AllDirector(ListView):
         context.update({
             'dir': Director.objects.all()[3:],
             'title': 'Список режиссеров',
-            'agg': Director.objects.all()[3:].aggregate(Max('age')),
+            'agg': Director.objects.all()[3:].aggregate(Max('age'), Min('age')),
             'dc_bar': dc_bar,
         })
         return context
@@ -302,7 +302,7 @@ class Movies(ListView):
         context.update({
             'dir': Director.objects.all()[3:],
             'title': 'Список режиссеров',
-            'agg': Director.objects.all()[3:].aggregate(Max('age')),
+            'agg': Director.objects.all()[3:].aggregate(Max('age'), Min('age')),
             'dc_bar': dc_bar,
         })
 # def movies(request):
