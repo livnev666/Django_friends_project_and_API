@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib import admin, messages
 from .models import Movie, Director, Actor, Photos
 from django.db.models import QuerySet
+from django.utils.safestring import mark_safe
 # Register your models here.
 
 
@@ -24,7 +25,7 @@ class CategoryFilter(admin.SimpleListFilter):
         if self.value() == 'комедии':
             return queryset.filter(id__in=[1, 4, 7, 8, 9, 16, 20])
         if self.value() == 'мелодрамы':
-            return queryset.filter(id__in=[3, 6, 11, 15])
+            return queryset.filter(id__in=[3, 6, 11, 15, 23])
         if self.value() == 'триллеры':
             return queryset.filter(id__in=[2, 13, 14])
         return queryset
@@ -57,21 +58,30 @@ class RatingFilter(admin.SimpleListFilter):
 
 @admin.register(Director)
 class DirectorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'content', 'photo']
+    list_display = ['id', 'first_name', 'last_name', 'content', 'image_photo_directors']
     list_display_links = ['first_name', 'last_name']
     list_per_page = 5
     ordering = ['id']
     prepopulated_fields = {'slug': ('first_name',)}
 
+    def image_photo_directors(self, obj):
+        if obj.photo:
+            return mark_safe("<img src='{}' width='60'/>".format(obj.photo.url))
+    image_photo_directors.__name__ = 'Фотокарточка'
+
 
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'content', 'photo', 'is_published', 'link_web']
+    list_display = ['id', 'first_name', 'last_name', 'content', 'image_photo_actors', 'is_published', 'link_web']
     list_display_links = ['first_name', 'last_name']
     list_per_page = 5
     ordering = ['id']
     prepopulated_fields = {'slug': ('first_name', )}
 
+    def image_photo_actors(self, obj):
+        if obj.photo:
+            return mark_safe("<img src='{}' width='60'/>".format(obj.photo.url))
+    image_photo_actors.__name__ = 'Фотокарточка'
 
 
 @admin.register(Movie)
@@ -89,8 +99,13 @@ class MovieAdmin(admin.ModelAdmin):
 @admin.register(Photos)
 class PhotosAdmin(admin.ModelAdmin):
 
-    list_display = ['id', 'photo']
+    list_display = ['id', 'image_photo']
     ordering = ['id']
+
+    def image_photo(self, obj):
+        if obj.photo:
+            return mark_safe("<img src='{}' width='60'/>".format(obj.photo.url))
+    image_photo.__name__ = 'Фотокарточка'
 
 
 
